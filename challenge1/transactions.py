@@ -13,18 +13,24 @@ def get_transaction(id):
 
 @transaction_blueprint.route('/transaction', methods=['POST'])
 def add_transaction():
-    #TODO
-    return
+    new_transaction = request.json 
+    transactions_data[new_transaction['id']] = new_transaction
+    return jsonify(new_transaction), 201  
 
 @transaction_blueprint.route('/transaction/<id>', methods=['PUT'])
 def update_transaction(id):
-    #TODO
-    return
+    updated_transaction = request.json 
+    transactions_data[id] = updated_transaction
+    return jsonify(updated_transaction), 200
+
 
 @transaction_blueprint.route('/transaction/<id>', methods=['DELETE'])
 def delete_transaction(id):
-    #TODO
-    return
+    deleted_transaction = request.json
+    transactions_data[id] = deleted_transaction
+    return jsonify(deleted_transaction),200
 
 
-# TODO : ADD A GET ALL TRANSACTIONS ENDPOINT ASWELL
+@transaction_blueprint.route('/transactions', methods=['GET'])
+def get_all_transactions():
+    return jsonify(transactions_data), 200
